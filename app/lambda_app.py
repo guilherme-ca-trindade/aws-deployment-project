@@ -12,8 +12,8 @@ def response(status_code, body):
 def main(event, context):
     path = event.get('rawPath', event.get('path', ''))
     query = event.get('queryStringParameters', {}) or {}
-    
-    if path == '/hello':
+
+    if path in ('', '/') or path == '/hello':
         return response(200, {"message": "Hello, World!"})
 
     if path == '/random':

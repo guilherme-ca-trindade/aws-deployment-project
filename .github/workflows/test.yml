@@ -1,1 +1,45 @@
 name: Test
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - gui-branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: gui-branch
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install -r app/requirements_flask.txt
+
+      - name: Run tests
+        run: pytest
+
+      - name: Trigger Lambda deployment
+        if: success()
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: lambda.yml
+          ref: gui-branch
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger EC2 deployment
+        if: success()
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: ec2.yml
+          ref: gui-branch
+          token: ${{ secrets.GITHUB_TOKEN }}
