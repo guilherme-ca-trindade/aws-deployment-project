@@ -31,13 +31,19 @@ aws dynamodb describe-table --table-name dice-rolls
             "ReadCapacityUnits": 0,
             "WriteCapacityUnits": 0
         },
-        "TableSizeBytes": 0,
-        "ItemCount": 0,
+        "TableSizeBytes": 712,
+        "ItemCount": 5,
         "TableArn": "arn:aws:dynamodb:us-east-1:296440407077:table/dice-rolls",
         "TableId": "67461a1d-0d27-4762-9952-21a2ec87c89a",
         "BillingModeSummary": {
             "BillingMode": "PAY_PER_REQUEST",
             "LastUpdateToPayPerRequestDateTime": "2026-07-30T14:57:03.582000+00:00"
+        },
+        "DeletionProtectionEnabled": false,
+        "WarmThroughput": {
+            "ReadUnitsPerSecond": 12000,
+            "WriteUnitsPerSecond": 4000,
+            "Status": "ACTIVE"
         }
     }
 }
@@ -45,10 +51,7 @@ aws dynamodb describe-table --table-name dice-rolls
 ________________________________________________________________________________________
 EC2 Instance
 
-aws ec2 describe-instances \
-  --instance-ids i-0b9dd413f32b80340 \
-  --query 'Reservations[0].Instances[0]' \
-  --output json
+aws ec2 describe-instances --instance-ids i-0b9dd413f32b80340 --query 'Reservations[0].Instances[0]' --output json
 {
     "Architecture": "x86_64",
     "BlockDeviceMappings": [
@@ -76,277 +79,7 @@ aws ec2 describe-instances \
             "Association": {
                 "IpOwnerId": "amazon",
                 "PublicDnsName": "",
-                "PublicIp": "54.237.251.179"
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-    "Hypervisor": "xen",
-    "IamInstanceProfile": {
-        "Arn": "arn:aws:iam::296440407077:instance-profile/csd215-instance-profile",
-        "Id": "AIPAUKBJZUQSYZ3FQWAH2"
-    },
-    "NetworkInterfaces": [
-        {
-            "Association": {
-                "IpOwnerId": "amazon",
-                "PublicDnsName": "",
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-    "Hypervisor": "xen",
-    "IamInstanceProfile": {
-        "Arn": "arn:aws:iam::296440407077:instance-profile/csd215-instance-profile",
-        "Id": "AIPAUKBJZUQSYZ3FQWAH2"
-    },
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-    "Hypervisor": "xen",
-    "IamInstanceProfile": {
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-:
-{
-    "Architecture": "x86_64",
-:...skipping...
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-    "Hypervisor": "xen",
-    "IamInstanceProfile": {
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-    "Hypervisor": "xen",
-    "IamInstanceProfile": {
-        "Arn": "arn:aws:iam::296440407077:instance-profile/csd215-instance-profile",
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-    "Hypervisor": "xen",
-    "IamInstanceProfile": {
-        "Arn": "arn:aws:iam::296440407077:instance-profile/csd215-instance-profile",
-        "Id": "AIPAUKBJZUQSYZ3FQWAH2"
-    },
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-    "Hypervisor": "xen",
-    "IamInstanceProfile": {
-        "Arn": "arn:aws:iam::296440407077:instance-profile/csd215-instance-profile",
-        "Id": "AIPAUKBJZUQSYZ3FQWAH2"
-    },
-    "NetworkInterfaces": [
-:
-{
-    "Architecture": "x86_64",
-    "BlockDeviceMappings": [
-        {
-            "DeviceName": "/dev/xvda",
-            "Ebs": {
-                "AttachTime": "2026-07-30T16:34:12+00:00",
-                "DeleteOnTermination": true,
-                "Status": "attached",
-                "VolumeId": "vol-0d23b45fae6306e13",
-                "EbsCardIndex": 0
-            }
-        }
-    ],
-    "ClientToken": "fc9b172a-09db-47f2-bcc4-ab75d6b15089",
-    "EbsOptimized": false,
-    "EnaSupport": true,
-    "Hypervisor": "xen",
-    "IamInstanceProfile": {
-        "Arn": "arn:aws:iam::296440407077:instance-profile/csd215-instance-profile",
-        "Id": "AIPAUKBJZUQSYZ3FQWAH2"
-    },
-    "NetworkInterfaces": [
-        {
-            "Association": {
-                "IpOwnerId": "amazon",
-                "PublicDnsName": "",
-                "PublicIp": "54.237.251.179"
+                "PublicIp": "54.172.116.208"
             },
             "Attachment": {
                 "AttachTime": "2026-07-30T16:34:11+00:00",
@@ -373,7 +106,7 @@ aws ec2 describe-instances \
                     "Association": {
                         "IpOwnerId": "amazon",
                         "PublicDnsName": "",
-                        "PublicIp": "54.237.251.179"
+                        "PublicIp": "54.172.116.208"
                     },
                     "Primary": true,
                     "PrivateIpAddress": "10.0.0.174"
@@ -452,7 +185,6 @@ aws ec2 describe-instances \
     "ImageId": "ami-08bc385c9fc5afc94",
     "State": {
         "Code": 16,
-        "Code": 16,
         "Name": "running"
     },
     "PrivateDnsName": "ip-10-0-0-174.ec2.internal",
@@ -462,7 +194,7 @@ aws ec2 describe-instances \
     "AmiLaunchIndex": 0,
     "ProductCodes": [],
     "InstanceType": "t2.nano",
-    "LaunchTime": "2026-07-30T16:34:11+00:00",
+    "LaunchTime": "2026-08-08T17:34:00+00:00",
     "Placement": {
         "AvailabilityZoneId": "use1-az2",
         "GroupName": "",
@@ -475,11 +207,10 @@ aws ec2 describe-instances \
     "SubnetId": "subnet-0cb9af1b37aadd28f",
     "VpcId": "vpc-0e6b29470e4c79dd5",
     "PrivateIpAddress": "10.0.0.174",
-    "PublicIpAddress": "54.237.251.179"
+    "PublicIpAddress": "54.172.116.208"
 }
 
-______________________________________________________________________________________
-
+________________________________________________________________________________________
 Lambda Function
 
 aws lambda get-function --function-name csd215-lambda --region us-east-1
@@ -525,8 +256,7 @@ aws lambda get-function --function-name csd215-lambda --region us-east-1
             "OptimizationStatus": "Off"
         },
         "RuntimeVersionConfig": {
-            "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:b46f7bc0f3da8071d1b824
-471f2c69c8766b756b827eb0455d2118c622ae7bcf"
+            "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:b46f7bc0f3da8071d1b824471f2c69c8766b756b827eb0455d2118c622ae7bcf"
         },
         "LoggingConfig": {
             "LogFormat": "Text",
@@ -535,21 +265,6 @@ aws lambda get-function --function-name csd215-lambda --region us-east-1
     },
     "Code": {
         "RepositoryType": "S3",
-        "Location": "https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/
-296440407077/csd215-lambda-834cc5c6-f531-4665-9447-838ace2b595a?versionId=hu9EzXQsjTWt3Ski
-4Wli3NTL.VCZlurW&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEa
-CXVzLWVhc3QtMSJHMEUCIQCh%2BW4tfk2kLM9JQbxebLIulXRnjwoO3Hs3qy1ADhi2swIgZvlA5osv2NCT6KvgDGGT
-dILtwkZNEMTghMe8V0n%2Be54qlAIIr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAEGgw0NzkyMzMwMjUzNzkiDO
-IY%2F%2B%2FZPfzANxLfTSroATUIOKoImM148cep8C%2BtFyfOxMIc8xl2h23TgJY4jNdXs3VITs36E%2BuCNim5p2
-TT%2BgFLbSM4xGKsG4mV3CjjLZmcCE7NHxuMAfTp3YUJMujYJe%2FABrAcah1BO3338sSjDfFSF7DiaHoDrJyIHnAk
-WOYDqIqD0m%2F1XPjgNQrEKIJW4vz4K6vz6lSvHidbeE72%2F%2BnMXYuVdVFCRTzCSV8eTueTOTgpFzMyVkYr870G
-uqAYm%2BPjFzFAhfuQ1itddz9LxAl0YK3bu9xEHLG4Vjdz03cgom8K6EAuMWVOOv%2FuXK7%2BfsY%2FuTN%2F%2Fm
-owldKy0wY6jQErEPeTYu%2BiqPagON97CK9hRrMUVmXkDPvByW9NFpWJSL6GRFf5V4RvI4QxAUaWfpqu0qGKQNmUpx
-XcUUvNCLesoceB%2FfojFDG97kUoBSignsZncGusLVJklY6r3n4D8m04j34x6aZQiFWXbzEh4fz7X%2B9rrmGQyklw
-GRH29wrPtlTFV7egKWLgFZ54NNs%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260731T151102
-Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVRYSY5L56E%2F20260
-731%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=acce890ff2de14a50157cc11a2d0123f7f8414
-1717b8fbb66d4bfc13a7a131f6"
+        "Location": "https://prod-iad-c1-djusa-tasks.s3.us-east-1.amazonaws.com/snapshots/296440407077/csd215-lambda-834cc5c6-f531-4665-9447-838ace2b595a?versionId=hu9EzXQsjTWt3Ski4Wli3NTL.VCZlurW&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQChU3CZP1Ng5bfko4Q8%2Foh5h0s7J4I8Wkf1CGdTsZ7ewgIhAM6nQi%2FjM61S6wv95MNYETXgIWI3%2BNygDx2HcSc%2F5OnhKosCCGkQBBoMNDc5MjMzMDI1Mzc5IgzMxLtnkxu0xdMeIlUq6AFRvL%2Fs7GDTNgrAOK2cY4K09c7UmzFDBJEq2j7dTal3eQukGL%2BNpgIdbLyic8OT02hVAXEb%2FH6OJwIbiXrxJC%2Bh0Ab5BSTPKu98mPoC8IM%2BsVxgXzZ0kJqtRMmsig5wA7U4Kj85KupnZkNBs%2Fu6L%2BvdSDAFAdYYAcwwY06%2F7D0yAMLhREYCM99zpnS4SDA6x5dbIux1qn6JKKhO2Mar%2B2%2Fk62rcJXju0Rt6D%2FtJl9gwSY4AtO%2B4R%2FiyFD8A4X57IyuqlJ%2FhxSDc0%2FLujTu9ZvnFVDWQr%2BJCvj4ot%2BeU23dwtQcakyATDplOMNXN29MGOowBnysEM1qWhB0RbXwRDua8w9fysvLPU1rK5GvzdgEPD2kBhh6lnN3jY8JHWQ6frkYRwfbVT77IFSp67iAwl%2BNkEEB8Dqc04RpJjJP8SEcBe4yY1NF9H4%2FuEJp1UYkSivRgfdgRCADnS26caf2yWjDO9vwwJCbjnmQVJ3hOHucke1VEWKBNoj27PbUUMxc%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260808T181653Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAW7FEDUVRSJSKZWLX%2F20260808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b0336bd1347bb129fd9eff4bd9949604f8a8b50bd96e01ec8792f1f62468000d"
     }
 }
-

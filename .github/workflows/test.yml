@@ -2,6 +2,7 @@ name: Test
 
 permissions:
   contents: write
+  actions: write # Required so the workflow-dispatch steps below can trigger other workflows
 
 on:
   push:

@@ -1,14 +1,38 @@
 # Nginx Reverse Proxy
 
-Nginx is used here as a reverse proxy to forward incoming HTTP traffic from port 80 to the Flask application running locally on port 8000.
+In this setup, gunicorn runs the Flask app bound to `127.0.0.1:8000`, which means it only
+accepts connections coming from the instance itself. Nginx listens on port 80 on all
+interfaces and forwards ("proxies") each request to gunicorn, then passes the response back
+to the client. Nginx is therefore the only thing that makes the app reachable from outside
+the EC2 instance at all.
 
-The setup is useful because:
-- it allows the web server to receive traffic on a standard port
-- it keeps the Flask app running in the background as a service
-- it helps separate web serving concerns from the application logic
-- it makes the deployment cleaner and easier to manage
+## Why do it this way
 
-Using nginx as a reverse proxy improves reliability. And AWS is essential here it provides the cloud infrastructure to host our app and making it reachable on the internet, no needing any longer to run locally on the machine. Therefore, AWS handles the infrastructure and our project focus on deplying the app. So the connection happens as:
-- AWS provides the server environment
-- nginx handles web requests
-- our app runs behind nginx on that AWS server
+- **Port 80 without running the app as root.** Binding to ports below 1024 requires root
+  privileges. Nginx handles that with a root master process that immediately drops to
+  unprivileged workers, so the Flask app can keep running as the ordinary `ec2-user`
+  account. If the app is ever compromised, the attacker does not get root.
+
+- **Only the ports we intend are exposed.** The `csd215-ec2-sg` security group opens only
+  22 (SSH) and 80 (HTTP). Port 8000 is never exposed, so gunicorn cannot be reached
+  directly from the internet — every request has to come through nginx.
+
+- **It protects the limited gunicorn workers.** Gunicorn is running with sync workers, and
+  each one can only handle a single request at a time. Nginx buffers slow requests and slow
+  responses, so a client on a bad connection ties up nginx instead of occupying a worker for
+  the whole transfer.
+
+- **The app still sees the real client.** The config sets `Host`, `X-Real-IP` and
+  `X-Forwarded-For`, so the original client IP is not lost behind the proxy.
+
+- **Separation of concerns.** Nginx is built for web-serving jobs like static files,
+  compression, TLS termination and rate limiting; gunicorn just runs the Python code. Each
+  piece does what it is good at.
+
+- **Deployments are cleaner.** The CI/CD pipeline restarts the app with
+  `sudo systemctl restart diceapp`, and nginx keeps holding port 80 the whole time. What is
+  exposed to the internet never changes just because the app was redeployed.
+
+## How a request flows
+
+    browser  →  EC2 public IP :80  →  nginx  →  127.0.0.1:8000  →  gunicorn  →  Flask app
