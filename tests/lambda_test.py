@@ -8,6 +8,13 @@ def test_404():
     response = app({"httpMethod": "GET", "rawPath": "/nonexistent"}, {})
     assert response["statusCode"] == 404, "Expected status code 404 for nonexistent endpoint"
 
+def test_root_path_works():
+    response = app({"httpMethod": "GET", "rawPath": "/"}, {})
+    assert response["statusCode"] == 200, "Expected status code 200 for the root path"
+
+    body = json.loads(response["body"])
+    assert body["message"] == "Hello, World!", "Expected a hello message for the root path"
+
 def test_random_works():
     response = app({"httpMethod": "GET", "rawPath": "/random"}, {})
     assert response["statusCode"] == 200, "Expected status code 200 for /random endpoint"
