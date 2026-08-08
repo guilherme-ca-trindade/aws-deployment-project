@@ -12,6 +12,17 @@ jobs:
         with:
           ref: gui-branch
 
+      # TEMPORARY: prints only the key's public fingerprint (not secret material)
+      # to confirm EC2_KEY is the same key pair the instance authorises.
+      - name: Verify EC2_KEY fingerprint
+        env:
+          KEY: ${{ secrets.EC2_KEY }}
+        run: |
+          printf '%s\n' "$KEY" > /tmp/id_test && chmod 600 /tmp/id_test
+          FP=$(ssh-keygen -lf /tmp/id_test | awk '{print $2}')
+          echo "::notice::EC2_KEY fingerprint = $FP"
+          echo "::notice::instance expects    = SHA256:pSxWxygWl0T8880aK6aG7ETv/RtV15ysixkHvBGNTMg"
+
       - name: Deploy to EC2 over SSH
         uses: appleboy/ssh-action@v1.2.5
         with:
