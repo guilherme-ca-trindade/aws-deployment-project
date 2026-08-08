@@ -12,6 +12,19 @@ jobs:
         with:
           ref: gui-branch
 
+      # TEMPORARY: reports whether the EC2_KEY secret is reaching the runner.
+      # Prints only the length and the non-secret PEM header line.
+      - name: Preflight check for EC2_KEY
+        env:
+          KEY: ${{ secrets.EC2_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "::error::EC2_KEY is missing or empty on the runner"
+            exit 1
+          fi
+          CRS=$(printf '%s' "$KEY" | grep -c $'\r' || true)
+          echo "::notice::EC2_KEY present - ${#KEY} chars, $(printf '%s' "$KEY" | wc -l) lines, ${CRS} CR chars, header: $(printf '%s' "$KEY" | head -1)"
+
       - name: Deploy to EC2 over SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
