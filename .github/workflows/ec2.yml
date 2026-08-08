@@ -38,7 +38,7 @@ jobs:
           echo "::notice::ssh result - $(printf '%s' "$OUT" | tr '\n' ' ' | cut -c1-250)"
 
       - name: Deploy to EC2 over SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         with:
           # NOTE: The public IP changes every time the Learner Lab restarts or the
           # instance is stopped/started. Update this value when that happens.
