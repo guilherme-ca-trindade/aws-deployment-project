@@ -12,31 +12,6 @@ jobs:
         with:
           ref: gui-branch
 
-      # TEMPORARY: reports whether the EC2_KEY secret is reaching the runner.
-      # Prints only the length and the non-secret PEM header line.
-      - name: Preflight check for EC2_KEY
-        env:
-          KEY: ${{ secrets.EC2_KEY }}
-        run: |
-          if [ -z "$KEY" ]; then
-            echo "::error::EC2_KEY is missing or empty on the runner"
-            exit 1
-          fi
-          case "$KEY" in
-            *$'\n') echo "::notice::secret DOES end with a newline (${#KEY} chars, $(printf '%s' "$KEY" | grep -c '' ) lines)" ;;
-            *)      echo "::notice::secret does NOT end with a newline (${#KEY} chars, $(printf '%s' "$KEY" | grep -c '' ) lines)" ;;
-          esac
-          printf '%s\n' "$KEY" > /tmp/id_test
-          chmod 600 /tmp/id_test
-          if ssh-keygen -y -f /tmp/id_test > /dev/null 2>/tmp/kerr; then
-            echo "::notice::key parses OK"
-          else
-            echo "::error::key does NOT parse - $(tr '\n' ' ' < /tmp/kerr | cut -c1-200)"
-          fi
-          OUT=$(ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=15 \
-                    -i /tmp/id_test ec2-user@54.172.116.208 'echo SSH_OK' 2>&1 || true)
-          echo "::notice::ssh result - $(printf '%s' "$OUT" | tr '\n' ' ' | cut -c1-250)"
-
       - name: Deploy to EC2 over SSH
         uses: appleboy/ssh-action@v1.2.5
         with:
